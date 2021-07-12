@@ -30,7 +30,7 @@ func (app *App) AttemptLogin() gin.HandlerFunc {
 		if err := ctx.ShouldBind(&user); err != nil {
 			panic(err)
 		}
-		errs := user.Validate(app.db.DB)
+		errs := user.Validate(app.DB.DB)
 		if len(errs) != 0 {
 			log.Printf("there are errors %s", errs)
 		}

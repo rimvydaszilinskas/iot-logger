@@ -3,16 +3,19 @@ package api
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/rimvydaszilinskas/announcer-backend/db"
+	"github.com/rimvydaszilinskas/announcer-backend/rds"
 )
 
 type App struct {
-	db *db.Connection
+	db    *db.Connection
+	redis *rds.RedisClient
 }
 
-func GetApplication(connection *db.Connection, api *gin.RouterGroup) *App {
+func GetApplication(db *db.Connection, redis *rds.RedisClient, api *gin.RouterGroup) *App {
 
 	app := App{
-		db: connection,
+		db:    db,
+		redis: redis,
 	}
 
 	api.Use(CORSMiddleware())
@@ -25,13 +28,10 @@ func GetApplication(connection *db.Connection, api *gin.RouterGroup) *App {
 
 	api.GET("/devices", app.deviceListEndpoint())
 	api.POST("/devices", app.deviceCreationEndpoint())
-	api.GET("/devices/:id/entries/latest", app.latestDeviceEntry())
 
 	return &app
 }
 
 func (app *App) InitIot(iot *gin.RouterGroup) {
 	iot.Use(app.iotTokenMiddleware())
-	iot.GET("/", app.deviceEntryList())
-	iot.POST("/", app.addDeviceEntryEndpoint())
 }

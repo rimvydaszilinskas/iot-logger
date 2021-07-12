@@ -1,6 +1,8 @@
 package models
 
 import (
+	"fmt"
+
 	"github.com/rimvydaszilinskas/announcer-backend/utils"
 	"gorm.io/gorm"
 )
@@ -13,17 +15,12 @@ type Device struct {
 	Owner   User `gorm:"constraint:OnDelete:CASCADE"`
 
 	Token string
-
-	Entries []DeviceEntry `gorm:"many2many:entries;"`
-}
-
-type DeviceEntry struct {
-	gorm.Model
-
-	PublicIP string `json:"public_ip"`
-	LocalIP  string `json:"local_ip"`
 }
 
 func (d *Device) GenerateToken() {
 	d.Token = utils.GenerateToken(40)
+}
+
+func (d *Device) GetRedisKey() string {
+	return fmt.Sprintf("device-entry-%d-%d", d.OwnerID, d.ID)
 }

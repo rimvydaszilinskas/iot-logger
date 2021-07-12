@@ -2,6 +2,7 @@ package db
 
 import (
 	"fmt"
+	"log"
 	"os"
 
 	"github.com/rimvydaszilinskas/announcer-backend/models"
@@ -37,6 +38,9 @@ func NewConnection() (*Connection, error) {
 		port = "5433"
 	}
 	connectionString := fmt.Sprintf("host=%s port=%s dbname=%s user=%s password=%s", host, port, dbName, username, password)
+
+	log.Printf("Opening Postgres Gorm connection to %s:%s", host, port)
+
 	db, err := gorm.Open(postgres.New(postgres.Config{
 		DSN: connectionString,
 	}))
@@ -46,10 +50,10 @@ func NewConnection() (*Connection, error) {
 }
 
 func (c *Connection) MigrateAll() error {
+	log.Println("Migrating all the models")
 	models := []interface{}{
 		&models.Device{},
 		&models.User{},
-		&models.DeviceEntry{},
 	}
 
 	for _, model := range models {

@@ -2,6 +2,7 @@ package rds
 
 import (
 	"fmt"
+	"log"
 	"os"
 	"strconv"
 
@@ -27,6 +28,8 @@ func GetRedisClient() (*RedisClient, error) {
 
 	host := getRedisHost()
 	host = fmt.Sprintf("%s:%d", host, port)
+
+	log.Printf("opening redis connection to %s", host)
 
 	rdb := redis.NewClient(&redis.Options{
 		Addr:     host,

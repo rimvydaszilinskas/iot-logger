@@ -61,19 +61,3 @@ func (api *App) deviceCreationEndpoint() gin.HandlerFunc {
 		ctx.JSON(http.StatusCreated, newDevice)
 	}
 }
-
-func (api *App) latestDeviceEntry() gin.HandlerFunc {
-	return func(ctx *gin.Context) {
-		user := ctx.MustGet(ContextUserKey).(*models.User)
-		id := ctx.Param("id")
-
-		device, found, err := api.db.GetUserDevice(user, id)
-
-		if !found || err != nil || len(device.Entries) == 0 {
-			ctx.JSON(http.StatusNotFound, gin.H{})
-			return
-		}
-
-		ctx.JSON(http.StatusOK, device.Entries[len(device.Entries)-1])
-	}
-}

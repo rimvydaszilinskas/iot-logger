@@ -4,22 +4,25 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/rimvydaszilinskas/announcer-backend/api"
 	"github.com/rimvydaszilinskas/announcer-backend/db"
+	"github.com/rimvydaszilinskas/announcer-backend/rds"
 )
 
 type App struct {
-	db *db.Connection
+	DB    *db.Connection
+	Redis *rds.RedisClient
 }
 
-func GetApplication(connection *db.Connection) *gin.Engine {
+func GetApplication(connection *db.Connection, redis *rds.RedisClient) *gin.Engine {
 	router := gin.Default()
 
 	app := App{
-		db: connection,
+		DB:    connection,
+		Redis: redis,
 	}
 
 	apiGroup := router.Group("/api")
 	iotGroup := router.Group("/iot")
-	api := api.GetApplication(connection, apiGroup)
+	api := api.GetApplication(connection, redis, apiGroup)
 	api.InitIot(iotGroup)
 
 	router.LoadHTMLGlob("templates/*")
