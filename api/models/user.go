@@ -10,8 +10,8 @@ import (
 )
 
 type AuthenticationUser struct {
-	Email    string `json:"email"`
-	Password string `json:"password"`
+	Email    string `json:"email" form:"email"`
+	Password string `json:"password" form:"password"`
 }
 
 func (u *AuthenticationUser) ToUserModel() *dbModels.User {
@@ -24,6 +24,7 @@ func (u *AuthenticationUser) ToUserModel() *dbModels.User {
 	return user
 }
 
+// Validate checks user validity for creating a new user
 func (u *AuthenticationUser) Validate(db *gorm.DB) map[string]string {
 	errorsMap := map[string]string{}
 

@@ -5,33 +5,33 @@ import (
 	"github.com/rimvydaszilinskas/announcer-backend/db"
 )
 
-type API struct {
+type App struct {
 	db *db.Connection
 }
 
-func GetApplication(connection *db.Connection) *gin.Engine {
-	r := gin.Default()
+func GetApplication(connection *db.Connection, api *gin.RouterGroup) *App {
 
-	api := API{
+	app := App{
 		db: connection,
 	}
 
-	r.Use(CORSMiddleware())
+	api.Use(CORSMiddleware())
 
-	r.GET("/", api.pingEndpoint())
-	r.POST("/register", api.registrationEndpoint())
-	r.POST("/login", api.authenticationEndpoint())
+	api.GET("/", app.pingEndpoint())
+	api.POST("/register", app.registrationEndpoint())
+	api.POST("/login", app.authenticationEndpoint())
 
-	iot := r.Group("/iot")
-	iot.Use(api.iotTokenMiddleware())
-	iot.GET("/", api.deviceEntryList())
-	iot.POST("/", api.addDeviceEntryEndpoint())
+	api.Use(app.tokenMiddleware())
 
-	r.Use(api.tokenMiddleware())
+	api.GET("/devices", app.deviceListEndpoint())
+	api.POST("/devices", app.deviceCreationEndpoint())
+	api.GET("/devices/:id/entries/latest", app.latestDeviceEntry())
 
-	r.GET("/devices", api.deviceListEndpoint())
-	r.POST("/devices", api.deviceCreationEndpoint())
-	r.GET("/devices/:id/entries/latest", api.latestDeviceEntry())
+	return &app
+}
 
-	return r
+func (app *App) InitIot(iot *gin.RouterGroup) {
+	iot.Use(app.iotTokenMiddleware())
+	iot.GET("/", app.deviceEntryList())
+	iot.POST("/", app.addDeviceEntryEndpoint())
 }

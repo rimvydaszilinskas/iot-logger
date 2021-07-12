@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/rimvydaszilinskas/announcer-backend/api"
 	"github.com/rimvydaszilinskas/announcer-backend/db"
+	"github.com/rimvydaszilinskas/announcer-backend/web"
 )
 
 func main() {
@@ -16,7 +16,7 @@ func main() {
 		panic(err)
 	}
 
-	app := api.GetApplication(conn)
+	app := web.GetApplication(conn)
 
 	app.Run()
 }

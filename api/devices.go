@@ -9,7 +9,7 @@ import (
 	"github.com/rimvydaszilinskas/announcer-backend/models"
 )
 
-func (api *API) deviceListEndpoint() gin.HandlerFunc {
+func (api *App) deviceListEndpoint() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		user := ctx.MustGet(ContextUserKey).(*models.User)
 		devices, found, err := api.db.GetUserDevices(user)
@@ -27,7 +27,7 @@ func (api *API) deviceListEndpoint() gin.HandlerFunc {
 	}
 }
 
-func (api *API) deviceCreationEndpoint() gin.HandlerFunc {
+func (api *App) deviceCreationEndpoint() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		var device apimodels.Device
 		user := ctx.MustGet(ContextUserKey).(*models.User)
@@ -62,7 +62,7 @@ func (api *API) deviceCreationEndpoint() gin.HandlerFunc {
 	}
 }
 
-func (api *API) latestDeviceEntry() gin.HandlerFunc {
+func (api *App) latestDeviceEntry() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		user := ctx.MustGet(ContextUserKey).(*models.User)
 		id := ctx.Param("id")

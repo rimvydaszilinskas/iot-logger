@@ -7,7 +7,7 @@ import (
 	"github.com/rimvydaszilinskas/announcer-backend/api/models"
 )
 
-func (api *API) authenticationEndpoint() gin.HandlerFunc {
+func (api *App) authenticationEndpoint() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		var authUser models.AuthenticationUser
 		if err := ctx.ShouldBindJSON(&authUser); err != nil {

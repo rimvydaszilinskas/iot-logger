@@ -8,14 +8,14 @@ import (
 	"github.com/rimvydaszilinskas/announcer-backend/models"
 )
 
-func (api *API) deviceEntryList() gin.HandlerFunc {
+func (api *App) deviceEntryList() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		device := ctx.MustGet(ContextDeviceKey).(*models.Device)
 		ctx.JSON(http.StatusOK, device.Entries)
 	}
 }
 
-func (api *API) addDeviceEntryEndpoint() gin.HandlerFunc {
+func (api *App) addDeviceEntryEndpoint() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		device := ctx.MustGet(ContextDeviceKey).(*models.Device)
 		var entry models.DeviceEntry

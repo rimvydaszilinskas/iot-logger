@@ -10,7 +10,7 @@ import (
 const ContextUserKey = "AuthTokenUser"
 const ContextDeviceKey = "AuthTokenDevice"
 
-func (api *API) tokenMiddleware() gin.HandlerFunc {
+func (api *App) tokenMiddleware() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		authenticationHeader := ctx.Request.Header.Get("Authorization")
 
@@ -55,7 +55,7 @@ func CORSMiddleware() gin.HandlerFunc {
 	}
 }
 
-func (api *API) iotTokenMiddleware() gin.HandlerFunc {
+func (api *App) iotTokenMiddleware() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		authenticationHeader := ctx.Request.Header.Get("Authorization")
 
