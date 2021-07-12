@@ -9,6 +9,7 @@ require (
 	github.com/gin-gonic/gin v1.7.2 // indirect
 	github.com/go-ole/go-ole v1.2.5 // indirect
 	github.com/go-playground/validator/v10 v10.6.1 // indirect
+	github.com/go-redis/redis/v8 v8.11.0 // indirect
 	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/jackc/pgproto3/v2 v2.1.0 // indirect
 	github.com/json-iterator/go v1.1.11 // indirect
