@@ -22,7 +22,7 @@ func (db *Connection) GetUserDevices(user *models.User) ([]models.Device, bool, 
 func (db *Connection) GetDeviceByToken(token string) (*models.Device, bool, error) {
 	var device models.Device
 
-	if err := db.DB.Preload("Entries").First(&device, "token = ?", token).Error; err != nil {
+	if err := db.DB.First(&device, "token = ?", token).Error; err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
 			return nil, false, nil
 		}
@@ -35,7 +35,7 @@ func (db *Connection) GetDeviceByToken(token string) (*models.Device, bool, erro
 func (db *Connection) GetUserDevice(user *models.User, id string) (*models.Device, bool, error) {
 	var device models.Device
 
-	if err := db.DB.Preload("Entries").First(&device, "id = ? AND owner_id = ?", id, user.ID).Error; err != nil {
+	if err := db.DB.First(&device, "id = ? AND owner_id = ?", id, user.ID).Error; err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
 			return nil, false, nil
 		}

@@ -1,6 +1,7 @@
 package api
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 
@@ -59,5 +60,37 @@ func (api *App) deviceCreationEndpoint() gin.HandlerFunc {
 		}
 
 		ctx.JSON(http.StatusCreated, newDevice)
+	}
+}
+
+func (api *App) getDeviceState() gin.HandlerFunc {
+	return func(ctx *gin.Context) {
+		user := ctx.MustGet(ContextUserKey).(*models.User)
+		deviceID := ctx.Param("deviceID")
+
+		device, found, err := api.db.GetUserDevice(user, deviceID)
+
+		if err != nil {
+			log.Printf("error looking up device - %s", err)
+			ctx.JSON(http.StatusInternalServerError, gin.H{
+				"detail": "internal server error",
+			})
+			return
+		}
+
+		if !found {
+			ctx.JSON(http.StatusNotFound, gin.H{
+				"detail": fmt.Sprintf("device with ID=%s does not exist", deviceID),
+			})
+			return
+		}
+
+		state, err := api.redis.RetrieveDeviceState(device)
+
+		if err != nil {
+			fmt.Println(err)
+		}
+
+		ctx.JSON(http.StatusOK, state)
 	}
 }

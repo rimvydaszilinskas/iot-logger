@@ -28,10 +28,13 @@ func GetApplication(db *db.Connection, redis *rds.RedisClient, api *gin.RouterGr
 
 	api.GET("/devices", app.deviceListEndpoint())
 	api.POST("/devices", app.deviceCreationEndpoint())
+	api.GET("/devices/:deviceID", app.getDeviceState())
 
 	return &app
 }
 
 func (app *App) InitIot(iot *gin.RouterGroup) {
 	iot.Use(app.iotTokenMiddleware())
+
+	iot.POST("/", app.StoreDeviceState())
 }

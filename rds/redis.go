@@ -29,7 +29,7 @@ func GetRedisClient() (*RedisClient, error) {
 	host := getRedisHost()
 	host = fmt.Sprintf("%s:%d", host, port)
 
-	log.Printf("opening redis connection to %s", host)
+	log.Printf("opening redis connection to %s and database %d", host, db)
 
 	rdb := redis.NewClient(&redis.Options{
 		Addr:     host,
@@ -66,7 +66,7 @@ func getRedisDB() (int, error) {
 	port := os.Getenv("REDIS_DB")
 
 	if len(port) == 0 {
-		return 6379, nil
+		return 0, nil
 	}
 	return strconv.Atoi(port)
 }
