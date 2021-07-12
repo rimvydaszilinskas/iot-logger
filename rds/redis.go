@@ -8,11 +8,11 @@ import (
 	"github.com/go-redis/redis/v8"
 )
 
-type RedisConnection struct {
+type RedisClient struct {
 	redis *redis.Client
 }
 
-func GetRedisConnection() (*RedisConnection, error) {
+func GetRedisClient() (*RedisClient, error) {
 	port, err := getRedisPort()
 
 	if err != nil {
@@ -33,7 +33,7 @@ func GetRedisConnection() (*RedisConnection, error) {
 		Password: getRedisPassword(),
 		DB:       db,
 	})
-	return &RedisConnection{
+	return &RedisClient{
 		redis: rdb,
 	}, nil
 }
