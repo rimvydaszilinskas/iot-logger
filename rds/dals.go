@@ -12,13 +12,15 @@ import (
 var ctx = context.Background()
 
 func (r *RedisClient) StoreDeviceState(system *models.FullSystemDetails, device *models.Device) error {
+	currentTime := time.Now()
+	system.Time = &currentTime
 	data, err := json.Marshal(system)
 
 	if err != nil {
 		return fmt.Errorf("error marshalling full system details - %s", err)
 	}
 
-	return r.redis.Set(ctx, device.GetRedisKey(), string(data), time.Minute*10).Err()
+	return r.redis.Set(ctx, device.GetRedisKey(), string(data), time.Minute*30).Err()
 }
 
 func (r *RedisClient) RetrieveDeviceState(device *models.Device) (*models.FullSystemDetails, error) {
