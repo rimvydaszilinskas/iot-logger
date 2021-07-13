@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/rimvydaszilinskas/announcer-backend/models"
+	"github.com/rimvydaszilinskas/iot-logger/models"
 )
 
 var ctx = context.Background()

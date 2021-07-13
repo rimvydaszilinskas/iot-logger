@@ -6,7 +6,7 @@ import (
 	"golang.org/x/crypto/bcrypt"
 	"gorm.io/gorm"
 
-	"github.com/rimvydaszilinskas/announcer-backend/utils"
+	"github.com/rimvydaszilinskas/iot-logger/utils"
 )
 
 type User struct {

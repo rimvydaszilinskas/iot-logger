@@ -5,7 +5,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/rimvydaszilinskas/announcer-backend/models"
+	"github.com/rimvydaszilinskas/iot-logger/models"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )

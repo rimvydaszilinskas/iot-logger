@@ -6,7 +6,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/rimvydaszilinskas/announcer-backend/models"
+	"github.com/rimvydaszilinskas/iot-logger/models"
 )
 
 func (app *App) StoreDeviceState() gin.HandlerFunc {

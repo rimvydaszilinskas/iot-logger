@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"net/mail"
 
-	dbModels "github.com/rimvydaszilinskas/announcer-backend/models"
+	dbModels "github.com/rimvydaszilinskas/iot-logger/models"
 	"gorm.io/gorm"
 )
 

@@ -3,7 +3,7 @@ package db
 import (
 	"errors"
 
-	"github.com/rimvydaszilinskas/announcer-backend/models"
+	"github.com/rimvydaszilinskas/iot-logger/models"
 	"gorm.io/gorm"
 )
 

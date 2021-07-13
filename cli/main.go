@@ -7,9 +7,9 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/rimvydaszilinskas/announcer-backend/models"
-	"github.com/rimvydaszilinskas/announcer-backend/network"
-	"github.com/rimvydaszilinskas/announcer-backend/system"
+	"github.com/rimvydaszilinskas/iot-logger/models"
+	"github.com/rimvydaszilinskas/iot-logger/network"
+	"github.com/rimvydaszilinskas/iot-logger/system"
 )
 
 func main() {

@@ -1,4 +1,4 @@
-module github.com/rimvydaszilinskas/announcer-backend
+module github.com/rimvydaszilinskas/iot-logger
 
 go 1.16
 

@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/rimvydaszilinskas/announcer-backend/api/models"
+	"github.com/rimvydaszilinskas/iot-logger/api/models"
 )
 
 func (api *App) authenticationEndpoint() gin.HandlerFunc {

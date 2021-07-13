@@ -6,8 +6,8 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	apimodels "github.com/rimvydaszilinskas/announcer-backend/api/models"
-	"github.com/rimvydaszilinskas/announcer-backend/models"
+	apimodels "github.com/rimvydaszilinskas/iot-logger/api/models"
+	"github.com/rimvydaszilinskas/iot-logger/models"
 )
 
 func (api *App) deviceListEndpoint() gin.HandlerFunc {

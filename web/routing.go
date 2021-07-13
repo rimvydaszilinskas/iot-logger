@@ -2,9 +2,9 @@ package web
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/rimvydaszilinskas/announcer-backend/api"
-	"github.com/rimvydaszilinskas/announcer-backend/db"
-	"github.com/rimvydaszilinskas/announcer-backend/rds"
+	"github.com/rimvydaszilinskas/iot-logger/api"
+	"github.com/rimvydaszilinskas/iot-logger/db"
+	"github.com/rimvydaszilinskas/iot-logger/rds"
 )
 
 type App struct {

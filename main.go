@@ -3,9 +3,9 @@ package main
 import (
 	"log"
 
-	"github.com/rimvydaszilinskas/announcer-backend/db"
-	"github.com/rimvydaszilinskas/announcer-backend/rds"
-	"github.com/rimvydaszilinskas/announcer-backend/web"
+	"github.com/rimvydaszilinskas/iot-logger/db"
+	"github.com/rimvydaszilinskas/iot-logger/rds"
+	"github.com/rimvydaszilinskas/iot-logger/web"
 )
 
 func main() {

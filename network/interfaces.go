@@ -6,7 +6,7 @@ import (
 	"os/exec"
 	"strings"
 
-	"github.com/rimvydaszilinskas/announcer-backend/models"
+	"github.com/rimvydaszilinskas/iot-logger/models"
 )
 
 func getActiveNetworkInterfaceNameAndIp() (*string, *string, *string, error) {

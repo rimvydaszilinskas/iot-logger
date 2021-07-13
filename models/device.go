@@ -3,7 +3,7 @@ package models
 import (
 	"fmt"
 
-	"github.com/rimvydaszilinskas/announcer-backend/utils"
+	"github.com/rimvydaszilinskas/iot-logger/utils"
 	"gorm.io/gorm"
 )
 
